@@ -43,13 +43,15 @@ classDiagram
     Document <|-- DemandeImmatriculation
 
     Liasse o-- Document : contient
-    LiasseClient --> Liasse : cree
-    LiasseClient --> LiasseVierge : utilise
+    Liasse <|-- LiasseClient
+    Liasse <|-- LiasseVierge
 ```
 
 ### Rôle des classes
 
-- **LiasseVierge** : singleton qui contient la liste de documents types.
-- **LiasseClient** : construit une liasse client à partir de la liasse vierge.
-- **Liasse** : agrège les documents d'un client.
+- **Liasse** : classe de base qui agrège les documents.
+- **LiasseVierge** : singleton dérivé de `Liasse` qui contient la liste de
+  documents types.
+- **LiasseClient** : classe dérivée de `Liasse` pour représenter la liasse d'un
+  client.
 - **Document** et ses sous-classes : représentent les documents imprimables.
