@@ -34,10 +34,15 @@ classDiagram
         +imprime() void
     }
 
+    class Cloneable {
+        <<interface>>
+    }
+
     class BonDeCommande
     class CertificatSession
     class DemandeImmatriculation
 
+    Document ..|> Cloneable
     Document <|-- BonDeCommande
     Document <|-- CertificatSession
     Document <|-- DemandeImmatriculation
