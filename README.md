@@ -52,6 +52,10 @@ classDiagram
     Liasse <|-- LiasseVierge
 ```
 
+`Cloneable` indique que les objets `Document` peuvent être clonés. La méthode
+`duplique()` de `Document` utilise ce mécanisme pour créer une copie d'un
+document existant, notamment à partir des documents types de la liasse vierge.
+
 ### Rôle des classes
 
 - **Liasse** : classe de base qui agrège les documents.
