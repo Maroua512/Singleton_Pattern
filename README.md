@@ -1,21 +1,55 @@
 # Singleton Pattern
 
-Projet Java configuré avec Maven et Java 17.
+Le patron Singleton est un patron de création qui permet de garantir qu'une
+classe ne possède qu'une seule instance et de fournir un point d'accès global
+à cette instance.
 
-## Prérequis
+## Utilisation
 
-- JDK 17 ou supérieur ;
-- Maven 3.9 ou supérieur ;
-- Extension **Extension Pack for Java** dans VS Code.
+Ce patron est utile lorsqu'une seule instance d'une classe est nécessaire, par
+exemple pour contrôler l'accès à une ressource partagée.
 
-## Commandes
+## Architecture UML
 
-Depuis ce dossier :
+```mermaid
+classDiagram
+    class Liasse {
+        -documents : List~Document~
+        +ajoute(doc : Document) void
+        +imprime() void
+    }
 
-```bash
-mvn compile
-mvn exec:java
+    class LiasseVierge {
+        -instance : LiasseVierge
+        +getInstance() LiasseVierge
+        +getDocuments() List~Document~
+    }
+
+    class LiasseClient {
+        +creeLiasse(documentations : List~Document~) Liasse
+    }
+
+    class Document {
+        <<abstract>>
+        +imprime() void
+    }
+
+    class BonDeCommande
+    class CertificatSession
+    class DemandeImmatriculation
+
+    Document <|-- BonDeCommande
+    Document <|-- CertificatSession
+    Document <|-- DemandeImmatriculation
+
+    Liasse o-- Document : contient
+    LiasseClient --> Liasse : cree
+    LiasseClient --> LiasseVierge : utilise
 ```
 
-Dans VS Code, utilisez la configuration **Lancer App** ou les tâches Maven
-disponibles dans la palette de commandes.
+### Rôle des classes
+
+- **LiasseVierge** : singleton qui contient la liste de documents types.
+- **LiasseClient** : construit une liasse client à partir de la liasse vierge.
+- **Liasse** : agrège les documents d'un client.
+- **Document** et ses sous-classes : représentent les documents imprimables.
